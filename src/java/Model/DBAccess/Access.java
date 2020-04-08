@@ -16,7 +16,7 @@ import java.sql.Statement;
  */
 public class Access {
     
-    private String DATABASEPATH = "\"C:\\Users\\Neal Valdez\\Desktop\\java3\\DentistWebApp\\dbStorage\\DentistOfficeACCDB.accdb\"";
+    private String DATABASEPATH = "C:\\Users\\Neal Valdez\\Desktop\\java3\\DentistWebApp\\dbStorage\\DentistOfficeACCDB.accdb";
 	private Connection CONNECTION;
 	private Statement STATEMENT;
         
