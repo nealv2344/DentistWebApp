@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 8, 2020, 8:57:23 PM
+    Author     : Neal Valdez
+*/
+
+.jumbotron{
+    margin-bottom: 0;
+    background-color: #00333B;
+    color: white;
+   	font-family: Century Schoolbook;
+}
+
+a{
+	color: black;
+	font-family: Segoe Ui;
+}
+
+.nav-item {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+.full-width-image {
+	width: 100vw;
+   position: relative;
+   left: 50%;  
+   margin-left: -50vw;
+}
+
+.full-width-image img {
+  width: 100%;
+}
+
+.container {
+	position: relative;
+}
+
+.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.login-img img {width:10%; max-height:20%;}
