@@ -56,7 +56,7 @@ public class Dentist extends Person{
             setEmail(result.getString(5));
             setOfficeNum(result.getString(6));                 
             
-            System.out.println("Customer " + Id + " Successfully selected" + System.lineSeparator());
+            System.out.println("Dentist " + Id + " Successfully selected" + System.lineSeparator());
             
             databaseAccess.close();            
         } 
