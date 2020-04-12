@@ -49,12 +49,12 @@ public class Dentist extends Person{
             result.next();
             
             //set properties
-            setFname(result.getString(1));
-            setLname(result.getString(2));
-            setEmail(result.getString(3));
-            setId(result.getString(4));
-            setPw(result.getString(6));
-            setOfficeNum(result.getString(5));
+            setId(result.getString(1)); 
+            setPw(result.getString(2));
+            setFname(result.getString(3)); 
+            setLname(result.getString(4));                                               
+            setEmail(result.getString(5));
+            setOfficeNum(result.getString(6));                 
             
             System.out.println("Customer " + Id + " Successfully selected" + System.lineSeparator());
             
@@ -65,6 +65,72 @@ public class Dentist extends Person{
         }
     }
     
+    public void insertDB(){
+        try {
+             Access databaseAccess = new Access();
+            
+            //setup statment
+            String sql = "INSERT INTO Dentists " +
+                         "VALUES('" +getId()+ "', '" + getPw()+ "', '" + getFname()+ "', '" + getLname()+ "', '" + getEmail()+ "', '" + getOfficeNum()+ "')";             
+            
+            //execute insertion                         
+            int num = databaseAccess.getStatement().executeUpdate(sql);
+            
+            //deal with result
+            if (num == 1){
+                
+                //debug to console
+                System.out.println("Insert successful!" + System.lineSeparator());
+                
+            }else {
+                //debug to console
+                System.out.println("Insert failed!" + System.lineSeparator());
+            }
+            
+            databaseAccess.close();
+
+        }
+
+        catch (ClassNotFoundException | SQLException e){
+            System.out.println("Exception caught - " + e + System.lineSeparator());
+        }
+    }
+    
+    public void deleteDB() {
+        
+        try{
+            Access databaseAccess = new Access();
+            
+            //setup statment
+            String sql = "DELETE FROM Dentists WHERE id = " + "'"+getId()+"'";          
+            System.out.println(sql);
+            //execute Deletion                                               
+            int num = databaseAccess.getStatement().executeUpdate(sql);
+            
+            //deal with result
+            if (num == 1){
+                //debug to console
+                System.out.println("Deletion successful!" + System.lineSeparator());
+                //reset properties to blank values
+                this.setId("");
+                this.setPw("");
+                this.setFname("");
+                this.setLname("");
+                this.setEmail("");
+                this.setOfficeNum("");
+            }else {
+                //debug to console
+                System.out.println("Deletion failed!" + System.lineSeparator());
+            }                        
+        } 
+        catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Exception caught - " + ex + System.lineSeparator());
+        }
+        
+    }
+    
+    
+    
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+getFname()+"\t Lname: "+getLname()+"\t email: "+getEmail()+"\t OfficeNum: "+getOfficeNum());
     }
@@ -72,8 +138,10 @@ public class Dentist extends Person{
     
     public static void main(String[]args){
         Dentist d1 = new Dentist();
-        d1.selectDB("D201");
+        d1.selectDB("D206");
         d1.display();
+        
+        
     }
     
     
