@@ -8,8 +8,7 @@ and open the template in the editor.
     <head>
         <title>Dentist Office</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="stylesheet/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
         <!--BOOTSTRAP 4-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -18,7 +17,7 @@ and open the template in the editor.
         <!--FONTS-->
         
         <!--STYLESHEETS-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./stylesheets/style.css">
         <!--ICONS-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     </head>
@@ -35,19 +34,19 @@ and open the template in the editor.
                         <h4>Dentist Login</h4>
                     </div>
                     <div class="login-form mt-4">
-                        <form>
+                        <form action="Handler?action=dLogin" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                              <input id="email" name="Full Name" placeholder="Email Address" class="form-control" type="text">
+                              <input id="Id" name="inputId" placeholder="Input ID number" class="form-control" type="text">
                             </div>
                             <div class="form-group col-md-12">
-                              <input type="pass" class="form-control" id="pass" placeholder="Password">
+                              <input type="password" name="inputPassword" class="form-control" id="password" placeholder="Password">
                             </div>
                           </div>
                                                  
                         
                         <div class="form-row">
-                            <button type="button" class="btn btn-primary btn-block">Submit</button>
+                            <input type="submit" class="btn btn-primary btn-block"></input>
                         </div>
                     </form>
                     </div>
