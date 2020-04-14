@@ -26,9 +26,27 @@
     <body>
         <div class="jumbotron">
             <h1 style="text-align: center">Welcome</h1>      
+        </div> 
+        
+        <h2 style="text-align: center">Upcoming Appointments</h2>
+        
+        <div class="row" id="order-table-div">                
+          <table id="order-table">
+            <tr>
+              <th>ProcCode</th>
+              <th>Date/Time</th>
+              <th>Patient</th>             
+            </tr>                 
+            <tr>                                    
+                <td></td>
+                <td></td>                                                  
+                <td></td>
+            </tr>
             
             
+          </table>
         </div>
+        
         
         
         
