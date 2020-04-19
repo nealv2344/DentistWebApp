@@ -68,13 +68,13 @@ public class Appointment {
         Access access = new Access();
         
         String sql = "select * from Appointments where patId='"+patId+"'";
-        ResultSet result = access.getStatement().executeQuery(sql);
+        ResultSet rs = access.getStatement().executeQuery(sql);
         
-        result.next();
-        setDateTime(result.getString(1));
-        setProcCode(result.getString(2));        
-        setDentId(result.getString(3));
-        setPatId(result.getString(4));
+        rs.next();
+        setDateTime(rs.getString(1));
+        setPatId(rs.getString(2));           
+        setDentId(rs.getString(3));
+        setProcCode(rs.getString(4)); 
         
         
             System.out.println("Appointment selected");
