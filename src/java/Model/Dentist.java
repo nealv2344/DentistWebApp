@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class Dentist extends Person{
     
     String officeNum;
+    apptList aL = new apptList();
     
     public Dentist() {
         this("", "", "", "", "","");
@@ -44,6 +45,7 @@ public class Dentist extends Person{
             
             //execute statment
             String sql = "select * from Dentists WHERE id = '" + Id + "'";             
+            System.out.println(sql);
             ResultSet result = databaseAccess.getStatement().executeQuery(sql);            
 
             result.next();
@@ -63,6 +65,8 @@ public class Dentist extends Person{
         catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
+        
+        retrieveApptList();
     }
     
     public void insertDB(){
@@ -129,16 +133,45 @@ public class Dentist extends Person{
         
     }
     
+    public void retrieveApptList(){
+        
+        try{
+            Access access = new Access();
+            
+            String sql = "SELECT * FROM Appointments WHERE dentId= '"+getId()+"'";
+            System.out.println(sql);
+            ResultSet rs = access.getStatement().executeQuery(sql);
+            
+            String patId;
+            Appointment a;
+            
+            while(rs.next()){
+                patId = rs.getString(2);  
+                System.out.println(patId);
+                a = new Appointment();
+                a.selectDB(patId); 
+                aL.add(a);
+            }
+            System.out.println("Dentist appts for: " + getFname());                        
+            
+            access.close();
+            
+        }catch(ClassNotFoundException | SQLException ex){
+            System.out.println("Exception Caught - " + ex);
+        }
+    }
+    
     
     
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+getFname()+"\t Lname: "+getLname()+"\t email: "+getEmail()+"\t OfficeNum: "+getOfficeNum());
+       aL.displayList();
     }
     
     
     public static void main(String[]args){
         Dentist d1 = new Dentist();
-        d1.selectDB("D206");
+        d1.selectDB("D201");
         d1.display();
         
         
