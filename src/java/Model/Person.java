@@ -16,6 +16,8 @@ public class Person {
     protected String fname;
     protected String lname;
     protected String email;
+    public apptList apptList;
+    
     
     protected Person(){
         Id = "";
@@ -75,7 +77,13 @@ public class Person {
         this.email = email;
     }
     
+    public apptList getAppts(){
+        return apptList;
+    }
     
+    public void setApptList(apptList appts){
+        this.apptList = appts;
+    }
     
     public static void main(String [] args){
         Person p1 = new Person("Id","password","Fname","Lname","email");
