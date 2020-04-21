@@ -12,11 +12,17 @@ and open the template in the editor.
     margin-bottom: 0;
     background-color: #00333B;
     color: white;
-   	font-family: Century Schoolbook;
+    font-family: Century Schoolbook;
+}
+
+.navbar {
+    background-color: #00333B;
+    color: white;
+    font-family: Century Schoolbook;
 }
 
 a{
-	color: black;
+	color: white;
 	font-family: Segoe Ui;
 }
 
@@ -62,5 +68,5 @@ a{
 #order-table {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 100px;
+  
 }
