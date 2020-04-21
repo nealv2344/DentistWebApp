@@ -4,6 +4,7 @@
     Author     : Neal Valdez
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,11 +24,21 @@
         <!--ICONS-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     </head>
-    <body>
-        <div class="jumbotron">
-            <h1 style="text-align: center">Welcome</h1>      
-        </div> 
-        
+    <body>        
+        <nav class="navbar navbar-expand-md">
+            <!-- Brand/logo -->
+            <a class="navbar-brand" href="#" >Welcome ${dent1.getFname()}!</a>
+
+            <!-- Links -->
+            <ul class="navbar-nav justify-content-end" >
+              <li class="nav-item">
+                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp">Edit Credentials</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: gainsboro" href="index.html">Sign Out</a>
+              </li>
+            </ul>
+        </nav>
         <h2 style="text-align: center">Upcoming Appointments</h2>
         
         <div class="row" id="order-table-div">                
@@ -36,19 +47,33 @@
               <th>ProcCode</th>
               <th>Date/Time</th>
               <th>Patient</th>             
-            </tr>                 
+            </tr> 
+            
+            <c:forEach items="${d1}" var="apptList">
             <tr>                                    
-                <td></td>
-                <td></td>                                                  
-                <td></td>
+                <td>${apptList.getProcCode()}</td>
+                <td>${apptList.getDateTime()}</td>                                                  
+                <td>${apptList.getPatId()}</td>
             </tr>
-            
-            
+            </c:forEach>                      
           </table>
+        
         </div>
-        
-        
-        
+<!--        <div class="container">
+        <nav class="navbar navbar-expand-sm bg-dark justify-content-center">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+              </li>
+            </ul>
+        </nav>
+        </div>-->
         
         
         
