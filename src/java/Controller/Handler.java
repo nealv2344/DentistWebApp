@@ -52,8 +52,10 @@ public class Handler extends HttpServlet {
                     
                     Dentist d1 = new Dentist();
                     d1.selectDB(id);
+                    d1.retrieveApptList();
                     
-                    request.setAttribute("d1",d1);
+                    request.setAttribute("dent1", d1);
+                    request.setAttribute("d1",d1.aL.appts);
                     System.out.println("Dentist added to session");
                     
                     redirect = dentistPage;
