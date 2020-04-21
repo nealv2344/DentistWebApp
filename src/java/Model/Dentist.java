@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Dentist extends Person{
     
     String officeNum;
-    apptList aL = new apptList();
+    public apptList aL = new apptList();
     
     public Dentist() {
         this("", "", "", "", "","");
@@ -66,7 +66,6 @@ public class Dentist extends Person{
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
         
-        retrieveApptList();
     }
     
     public void insertDB(){
@@ -171,7 +170,7 @@ public class Dentist extends Person{
     
     public static void main(String[]args){
         Dentist d1 = new Dentist();
-        d1.selectDB("D201");
+        d1.selectDB("D202");
         d1.display();
         
         
