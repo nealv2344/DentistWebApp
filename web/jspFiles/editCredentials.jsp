@@ -29,8 +29,8 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-              <h4 class="card-title mt-3 text-center">Enter new Credentials for ${dent1.getFname()}</h4>
-                <form action="customerHandler?action=customerSignup" Method="POST">
+              <h4 class="card-title mt-3 text-center">Enter new Credentials for ${dentId}</h4>
+                <form action="..\Handler?action=editCreds" Method="POST">
                     <div class="form-group input-group" id="name_input">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -61,7 +61,7 @@
                                 <i class="fa fa-address-card"></i>
                             </span>
                         </div>
-                        <input name="Address" class="form-control" placeholder="Address" required autofocus type="text">
+                        <input name="Office" class="form-control" placeholder="Office Number" required autofocus type="text">
                     </div>
                     <div class="form-group input-group" id="pass_input">
                         <div class="input-group-prepend">
