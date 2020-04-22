@@ -6,6 +6,9 @@
 package Model;
 
 import Model.DBAccess.Access;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -99,6 +102,40 @@ public class Dentist extends Person{
         }
     }
     
+    public void updateDB(){
+        
+        try{
+            //loading driver
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            
+            //get connection
+            Connection con = 
+                    DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Neal Valdez\\Desktop\\java3\\DentistWebApp\\dbStorage\\DentistOfficeACCDB.accdb");
+                
+            //execute the statement
+            String sql;
+            sql = "UPDATE Dentists SET id=?,passwd=?,firstName=?,lastName=?,email=?,office=? WHERE id='" + Id + "'";
+            System.out.println(sql);
+            //create the Statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1,Id);
+            stmt.setString(2,password);
+            stmt.setString(3,fname);
+            stmt.setString(4,lname);
+            stmt.setString(5,email);
+            stmt.setString(6,officeNum);
+            stmt.executeUpdate();
+            
+            System.out.println("Dentist "+getId()+" successfully updated");
+            con.close();
+            
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println("Exception caught - " + e + System.lineSeparator());
+            e.printStackTrace();
+        }
+    }
+    
     public void deleteDB() {
         
         try{
@@ -128,6 +165,7 @@ public class Dentist extends Person{
         } 
         catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Exception caught - " + ex + System.lineSeparator());
+            
         }
         
     }
@@ -169,11 +207,14 @@ public class Dentist extends Person{
     
     
     public static void main(String[]args){
-        Dentist d1 = new Dentist();
-        d1.selectDB("D202");
-        d1.display();
+//        Dentist d1 = new Dentist();
+//        d1.selectDB("D202");
+//        d1.display();
         
-        
+//        Dentist d2 = new Dentist();
+//        d2.selectDB("D201");
+//        d2.setPw("newPass");
+//        d2.updateDB();
     }
     
     
