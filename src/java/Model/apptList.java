@@ -5,13 +5,14 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Neal Valdez
  */
-public class apptList {
+public class apptList implements Serializable{
     
     int count;
     public ArrayList<Appointment> appts = new ArrayList<>();
