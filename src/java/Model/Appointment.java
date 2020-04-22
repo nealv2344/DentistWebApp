@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Neal Valdez
  */
-public class Appointment {
+public class Appointment{
     String dateTime;
     String patId;
     String dentId;
