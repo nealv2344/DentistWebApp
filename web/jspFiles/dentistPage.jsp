@@ -32,7 +32,7 @@
             <!-- Links -->
             <ul class="navbar-nav justify-content-end" >
               <li class="nav-item">
-                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp">Edit Credentials</a>
+                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp?dentId=${dent1.getId()}">Edit Credentials</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color: gainsboro" href="index.html">Sign Out</a>
@@ -49,7 +49,7 @@
               <th>Patient</th>             
             </tr> 
             
-            <c:forEach items="${d1}" var="apptList">
+            <c:forEach items="${apptList}" var="apptList">
             <tr>                                    
                 <td>${apptList.getProcCode()}</td>
                 <td>${apptList.getDateTime()}</td>                                                  
@@ -59,24 +59,6 @@
           </table>
         
         </div>
-<!--        <div class="container">
-        <nav class="navbar navbar-expand-sm bg-dark justify-content-center">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link 1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-              </li>
-            </ul>
-        </nav>
-        </div>-->
-        
-        
-        
         
     </body>
 </html>
