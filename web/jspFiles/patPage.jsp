@@ -28,7 +28,7 @@
     <body>        
         <nav class="navbar navbar-expand-md">
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="#" >Welcome ${p1.getFname()}${p1.getId()}!</a>
+            <a class="navbar-brand" href="#" >Welcome ${p1.getFname()} ${p1.getLname()}!</a>
 
             <!-- Links -->
             <ul class="navbar-nav justify-content-end" >
