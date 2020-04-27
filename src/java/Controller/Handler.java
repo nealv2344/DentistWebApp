@@ -96,7 +96,7 @@ public class Handler extends HttpServlet {
     public void dentistLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String id = request.getParameter("inputId");
+                String id = request.getParameter("inputId");
                 String pw = request.getParameter("inputPassword");
                 boolean result = checkDentist(id,pw);
                 
@@ -152,7 +152,7 @@ public class Handler extends HttpServlet {
                        
                     RequestDispatcher rd = request.getRequestDispatcher("jspFiles/dentistPage.jsp");
                     rd.forward(request, response);
-                }catch(Exception e){
+                }catch(IOException | ServletException e){
                     e.printStackTrace();
                 }
                 
