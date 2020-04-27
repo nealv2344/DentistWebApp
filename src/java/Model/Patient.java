@@ -135,7 +135,7 @@ public class Patient extends Person{
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
     }
-    
+        
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+
                             getFname()+"\t Lname: "+getLname()+"\t Lname: "+getAddress()+"\t email: "+getEmail()+"\t InsCo: "+getInsCo());
