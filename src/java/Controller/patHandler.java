@@ -51,6 +51,9 @@ public class patHandler extends HttpServlet {
                 case("cancelAppt"):
                     cancelAppt(request,response);
                     break;
+                case("addAppt"):
+                    addAppt(request,response);
+                    break;
             }        
         }
     }
@@ -153,6 +156,30 @@ public class patHandler extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patNoAppt.jsp");
                 rd.forward(request, response);
     }
+    
+    public void addAppt(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException  {
+        
+        HttpSession ses1 = request.getSession();                
+        Patient p1 = (Patient)ses1.getAttribute("p1");
+        
+        String date = request.getParameter("Date");
+        String time = request.getParameter("Time");
+        String dentId = request.getParameter("Dentist");
+        String procCode = request.getParameter("Procedure");      
+        String dateTime = date+" "+time;
+        
+        Appointment a1 = new Appointment(dateTime,p1.getId(),dentId,procCode);
+        a1.insertDB();
+        a1.display();
+        
+        ses1.setAttribute("a1",a1);
+        ses1.setAttribute("p1",p1);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patPage.jsp");
+        rd.forward(request, response);
+        
+    }   
 
     private boolean checkPatient(String email, String pw) {
         String validate = null;
