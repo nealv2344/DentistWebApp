@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Neal Valdez
  */
-public class apptList implements Serializable{
+public class apptList{
     
     int count;
     public ArrayList<Appointment> appts = new ArrayList<>();
