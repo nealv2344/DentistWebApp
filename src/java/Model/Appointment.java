@@ -90,7 +90,7 @@ public class Appointment{
             
             //setup statment
             String sql = "INSERT INTO Appointments " +
-                         "VALUES('" +getDateTime()+ "', '" + getProcCode()+ "', '" + getDentId()+ "', '" + getPatId() + "')";             
+                         "VALUES('" +getDateTime()+ "', '" + getPatId()+ "', '" + getDentId()+ "', '" + getProcCode() + "')";             
             
             //execute insertion                         
             int num = databaseAccess.getStatement().executeUpdate(sql);
@@ -152,16 +152,16 @@ public class Appointment{
     
     public static void main (String[]args){
         
-//        Appointment a1 = new Appointment("May 12, 2018, 10am", "A912","D201","P321");
-//        a1.insertDB();
+        Appointment a1 = new Appointment("May 12, 2018, 10am", "A912","D201","P321");
+        a1.insertDB();
 
 //        Appointment a2 = new Appointment();
 //        a2.selectDB("A912");
 //        a2.display();
         
-        Appointment a3 = new Appointment();
-        a3.selectDB("A900");
-        a3.display();
+//        Appointment a3 = new Appointment();
+//        a3.selectDB("A900");
+//        a3.display();
     }
     
     
