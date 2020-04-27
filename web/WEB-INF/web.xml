@@ -4,9 +4,17 @@
         <servlet-name>Handler</servlet-name>
         <servlet-class>Controller.Handler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>patHandler</servlet-name>
+        <servlet-class>Controller.patHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Handler</servlet-name>
         <url-pattern>/Handler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>patHandler</servlet-name>
+        <url-pattern>/patHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
