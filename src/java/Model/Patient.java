@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
@@ -173,6 +174,26 @@ public class Patient extends Person{
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
     }
+    
+    public static int getRowCount(){
+        int count=0;
+        
+        try{
+            Access databaseAccess = new Access();
+            
+            //execute statment
+            String sql = "select * from Patients";             
+            ResultSet result = databaseAccess.getStatement().executeQuery(sql);            
+            while(result.next()){
+                count++;
+            }
+            
+            return count;
+        }catch(Exception e){
+            return 0;
+        }
+        
+    }
         
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+
@@ -190,17 +211,11 @@ public class Patient extends Person{
 //        Patient p2 = new Patient();
 //        p2.selectDB("A912");
 //        p2.deleteDB();
-
-          Patient p1 = new Patient();
-          p1.selectDB("A911");
-          p1.setFname("John");
-          p1.setLname("Franco");
-          p1.setAddress("Marietta");
-          p1.setEmail("jf@gmail.com");
-          p1.setPw("4555");
-          p1.setInsCo("Blue Cross");
-          p1.updateDB();
-          p1.display();
+        String id = "A9";
+        int count = getRowCount();
+        String num = Integer.toString(count);
+        String newId="A9"+num;
+        System.out.println(newId);
     }
     
     
