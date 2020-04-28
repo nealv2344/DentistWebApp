@@ -25,8 +25,8 @@
     </head>
     <body>
         
-        <h1>You have successfully updated your credentials</h1>
-        <a href="./jspFiles/dentistPage.jsp" style="color:black">Return to main page</a>
+        <h1>You have successfully signed Up!</h1>
+        <a href="./jspFiles/patNoAppt.jsp" style="color:black">Proceed to main page</a>
        
     </body>
 </html>
