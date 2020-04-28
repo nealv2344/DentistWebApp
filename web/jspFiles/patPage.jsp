@@ -33,7 +33,7 @@
             <!-- Links -->
             <ul class="navbar-nav justify-content-end" >
               <li class="nav-item">
-                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp?dentId=${p1.getId()}">Edit Credentials</a>
+                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editPatInfo.jsp?pId=${p1.getId()}">Edit Credentials</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color: gainsboro" href="index.html">Sign Out</a>
