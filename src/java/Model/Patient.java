@@ -6,6 +6,9 @@
 package Model;
 
 import Model.DBAccess.Access;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -104,6 +107,41 @@ public class Patient extends Person{
         }
     }
     
+    public void updateDB(){
+        
+        try{
+            //loading driver
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            
+            //get connection
+            Connection con = 
+                    DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Neal Valdez\\Desktop\\java3\\DentistWebApp\\dbStorage\\DentistOfficeACCDB.accdb");
+                
+            //execute the statement
+            String sql;
+            sql = "UPDATE Patients SET patId=?,passwd=?,firstName=?,lastName=?,addr=?,email=?,insCo=? WHERE patId='" + Id + "'";
+            System.out.println(sql);
+            //create the Statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1,Id);
+            stmt.setString(2,password);
+            stmt.setString(3,fname);
+            stmt.setString(4,lname);
+            stmt.setString(5,address);
+            stmt.setString(6,email);
+            stmt.setString(7,insCo);
+            stmt.executeUpdate();
+            
+            System.out.println("Patient "+getId()+" successfully updated");
+            con.close();
+            
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println("Exception caught - " + e + System.lineSeparator());
+            e.printStackTrace();
+        }
+    }
+    
     public void deleteDB(){
         try{
             Access databaseAccess = new Access();
@@ -138,20 +176,31 @@ public class Patient extends Person{
         
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+
-                            getFname()+"\t Lname: "+getLname()+"\t Lname: "+getAddress()+"\t email: "+getEmail()+"\t InsCo: "+getInsCo());
+                            getFname()+"\t Lname: "+getLname()+"\t Address: "+getAddress()+
+                            "\t email: "+getEmail()+"\t InsCo: "+getInsCo());
     }
     
     
     
     public static void main(String[]args){
-        Patient p1 = new Patient();
-        p1.selectDB("A900");
-        p1.display();
-        
-        Patient p2 = new Patient();
-        p2.selectDB("A912");
-        p2.deleteDB();
-        
+//        Patient p1 = new Patient();
+//        p1.selectDB("A900");
+//        p1.display();
+//        
+//        Patient p2 = new Patient();
+//        p2.selectDB("A912");
+//        p2.deleteDB();
+
+          Patient p1 = new Patient();
+          p1.selectDB("A911");
+          p1.setFname("John");
+          p1.setLname("Franco");
+          p1.setAddress("Marietta");
+          p1.setEmail("jf@gmail.com");
+          p1.setPw("4555");
+          p1.setInsCo("Blue Cross");
+          p1.updateDB();
+          p1.display();
     }
     
     
