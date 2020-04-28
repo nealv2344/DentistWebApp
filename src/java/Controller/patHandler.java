@@ -8,7 +8,7 @@ package Controller;
 import Model.Appointment;
 import Model.DBAccess.Access;
 import Model.Patient;
-import static Model.Patient.getColumnIdCount;
+import static Model.Patient.getRowCount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -152,7 +152,7 @@ public class patHandler extends HttpServlet {
             throws ServletException, IOException {
         //generating new id
         String A9 = request.getParameter("id");
-        int count = getColumnIdCount();
+        int count = getRowCount();
         String countConvert = Integer.toString(count);
         String id = A9+countConvert;
         
