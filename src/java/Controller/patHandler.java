@@ -11,6 +11,7 @@ import Model.Patient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,9 @@ public class patHandler extends HttpServlet {
                     break;
                 case("addAppt"):
                     addAppt(request,response);
+                    break;
+                case("editPatInfo"):
+                    editPatInfo(request,response);
                     break;
             }        
         }
@@ -118,6 +122,7 @@ public class patHandler extends HttpServlet {
                 HttpSession ses1 = request.getSession();
                 
                 ses1.setAttribute("p1", p);
+                ses1.setAttribute("pId", p.getId());
                 ses1.setAttribute("a1", a);
                 System.out.println("Patient & pat appointment added to session");
                 
@@ -128,6 +133,7 @@ public class patHandler extends HttpServlet {
                 
                 HttpSession ses1 = request.getSession();                
                 ses1.setAttribute("p1", p);
+                ses1.setAttribute("pId", p.getId());
                 
                 redirect = "jspFiles/patNoAppt.jsp";
             }
@@ -179,7 +185,57 @@ public class patHandler extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patPage.jsp");
         rd.forward(request, response);
         
-    }   
+    } 
+    
+    public void editPatInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        
+        
+        try{
+            HttpSession ses1 = request.getSession();
+            String id = (String) ses1.getAttribute("pId");
+            Patient p1 = (Patient) ses1.getAttribute("p1");
+
+            String fname = request.getParameter("FirstName");
+            String lname = request.getParameter("LastName");
+            String email = request.getParameter("Email");
+            String address = request.getParameter("Address");
+            String pw = request.getParameter("Password");
+            String insCo = request.getParameter("InsCo");
+            
+            p1.selectDB(id);
+            p1.setFname(fname);
+            p1.setLname(lname);
+            p1.setEmail(email);
+            p1.setAddress(address);
+            p1.setPw(pw);
+            p1.setInsCo(insCo);
+            p1.updateDB();
+
+
+            String redirect;
+            boolean validateAppt = validateAppt(id);
+            if(validateAppt == true){
+                Appointment a1 = (Appointment) ses1.getAttribute("a1");
+                a1.selectDB(id);
+                ses1.setAttribute("p1", p1);
+                ses1.setAttribute("a1", a1);
+                RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patPage.jsp");
+                rd.forward(request, response);
+
+            }else{
+                ses1.setAttribute("p1",p1);
+                RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patNoAppt.jsp");
+                rd.forward(request, response);
+            }
+
+            
+        }catch(IOException | ServletException e){
+            e.printStackTrace();
+        }
+        
+    }  
 
     private boolean checkPatient(String email, String pw) {
         String validate = null;
@@ -209,7 +265,7 @@ public class patHandler extends HttpServlet {
     
     private boolean validateAppt(String id){
         
-        String validate = null;
+        String validate="";
         
         try{
             Access access = new Access();
@@ -222,13 +278,9 @@ public class patHandler extends HttpServlet {
                 validate=rs.getString(2);
             }
             access.close();
-            if(validate.equals(id)){
-                return true;
-            }
-            else{
-                return false;
-            }            
-        }catch(Exception e){
+            System.out.println(validate);
+            return validate.equals(id);            
+        }catch(ClassNotFoundException | SQLException e){
             e.printStackTrace();
             return false;
         }
