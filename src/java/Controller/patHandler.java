@@ -8,6 +8,7 @@ package Controller;
 import Model.Appointment;
 import Model.DBAccess.Access;
 import Model.Patient;
+import static Model.Patient.getColumnIdCount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -46,8 +47,8 @@ public class patHandler extends HttpServlet {
                 case("customerLogin"):
                     patLogin(request,response);
                     break;
-                case("customerSignup"):
-                    
+                case("patSignup"):
+                    patSignup(request,response);
                     break;
                 case("cancelAppt"):
                     cancelAppt(request,response);
@@ -144,6 +145,34 @@ public class patHandler extends HttpServlet {
             System.out.println("Please Check credentials");
         }
         
+        
+    }
+    
+    public void patSignup(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //generating new id
+        String A9 = request.getParameter("id");
+        int count = getColumnIdCount();
+        String countConvert = Integer.toString(count);
+        String id = A9+countConvert;
+        
+        String fname = request.getParameter("fName");
+        String lname = request.getParameter("lName");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String insCo = request.getParameter("insurance");
+        
+        Patient p1 = new Patient(id,password,fname,lname,address,email,insCo);
+        p1.insertDB();
+        p1.display();
+        
+        HttpSession ses1 = request.getSession();
+        
+        ses1.setAttribute("p1",p1);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patNoAppt.jsp");
+        rd.forward(request, response);
         
     }
     
