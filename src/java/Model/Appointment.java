@@ -1,18 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Appointment Business Object
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Model;
 
 import Model.DBAccess.Access;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Neal Valdez
- */
+
 public class Appointment{
     String dateTime;
     String patId;
@@ -23,14 +27,19 @@ public class Appointment{
     public Appointment(){
         this("","","","");
     }
-
+    /**CONSTRUCTOR
+     * @param dateTime
+     * @param patId
+     * @param dentId
+     * @param procCode*/
     public Appointment(String dateTime,String patId,String dentId,String procCode){
         this.dateTime = dateTime;
         this.patId = patId;
         this.dentId = dentId;
         this.procCode = procCode;
     }
-    
+    /***GET/SET METHOD
+     * @return set/get***/
     public String getDateTime(){
         return dateTime;
     }
@@ -62,7 +71,11 @@ public class Appointment{
     public void setProcCode(String procCode){
         this.procCode = procCode;
     }
-
+    /**
+    *Select method used to select an appointment from database
+    *
+    *@param patId -- Patient Id
+    */
     public void selectDB(String patId){
         try{
         Access access = new Access();
@@ -83,7 +96,9 @@ public class Appointment{
             System.out.println("Exception caught: "+ ex + System.lineSeparator());
         }
     }
-    
+    /**
+    *Insert method used for inserting new appointment to the database
+    */
     public void insertDB(){
         try {
              Access databaseAccess = new Access();
@@ -114,7 +129,10 @@ public class Appointment{
             System.out.println("Exception caught - " + e + System.lineSeparator());
         }
     }
-    
+    /**
+    *Delete method used for deleting appointments from database
+    *
+    */
     public void deleteDB(){
         try{
             Access databaseAccess = new Access();
@@ -145,11 +163,13 @@ public class Appointment{
         
         
     }
-    
+    /****DISPLAY METHOD****/
     public void display(){
        System.out.println("Date/Time: "+getDateTime()+"\t PatId: "+getPatId()+"\t DentId: "+getDentId()+"\t ProcCode: "+getProcCode());
     }
-    
+    /**
+    * Main method used for testing purposes
+    **/
     public static void main (String[]args){
         
         Appointment a1 = new Appointment("May 12, 2018, 10am", "A912","D201","P321");

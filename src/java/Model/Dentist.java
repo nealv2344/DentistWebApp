@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Dentist Business Object
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Model;
 
 import Model.DBAccess.Access;
@@ -12,10 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Neal Valdez
- */
+
 public class Dentist extends Person{
     
     String officeNum;
@@ -24,14 +28,21 @@ public class Dentist extends Person{
     public Dentist() {
         this("", "", "", "", "","");
     }
-    
+    /**CONSTRUCTOR
+     * @param Id*
+     * @param password*
+     * @param fname*
+     * @param lname*
+     * @param email*
+     * @param officeNum **/
     public Dentist(String Id, String password, String fname, String lname, String email, String officeNum){
         
         super(Id,password,fname,lname,email);
         
         this.officeNum = officeNum;
     }
-    
+    /***GET/SET METHOD
+     * @return get/set methods***/
     public String getOfficeNum(){
         return officeNum;
     }
@@ -40,8 +51,11 @@ public class Dentist extends Person{
         this.officeNum = officeNum;
     }
     
-    
-    
+    /**
+    *Select method used to select a Dentist from database
+    *
+    *@param Id -- Dentist Id
+    */    
     public void selectDB(String Id) {
         try{
             Access databaseAccess = new Access();
@@ -70,7 +84,9 @@ public class Dentist extends Person{
         }
         
     }
-    
+    /**
+    *Insert method used for inserting new dentist to the database
+    */
     public void insertDB(){
         try {
              Access databaseAccess = new Access();
@@ -101,7 +117,10 @@ public class Dentist extends Person{
             System.out.println("Exception caught - " + e + System.lineSeparator());
         }
     }
-    
+    /**
+    *Update method used for updating dentist info from database
+    *
+    */
     public void updateDB(){
         
         try{
@@ -135,7 +154,10 @@ public class Dentist extends Person{
             e.printStackTrace();
         }
     }
-    
+    /**
+    *Delete method used for deleting dentists from database
+    *
+    */
     public void deleteDB() {
         
         try{
@@ -169,7 +191,10 @@ public class Dentist extends Person{
         }
         
     }
-    
+    /**
+    * Retrieve appointments by dentist id.
+    * Adds appointments into arraylist.
+    */
     public void retrieveApptList(){
         
         try{
@@ -199,13 +224,16 @@ public class Dentist extends Person{
     }
     
     
-    
+    /******DISPLAY*******/
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+getFname()+"\t Lname: "+getLname()+"\t email: "+getEmail()+"\t OfficeNum: "+getOfficeNum());
        aL.displayList();
     }
     
-    
+    /**
+    *Used for testing purposes
+     * @param args
+    */
     public static void main(String[]args){
 //        Dentist d1 = new Dentist();
 //        d1.selectDB("D202");

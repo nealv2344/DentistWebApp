@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Handles requests from Dentists
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Controller;
 
 import Model.DBAccess.Access;
@@ -17,22 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Neal Valdez
- */
 public class Handler extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */                                
-            HttpSession ses1 = null;
+     */          
+        //initializes session
+         HttpSession ses1 = null;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,7 +92,11 @@ public class Handler extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    
+    /**
+    * Function recieves two input values from dentist login form.
+    * Creates new Dentist object and retrieves appt list.
+    * Object added into Session.  
+    */
     public void dentistLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -122,7 +126,12 @@ public class Handler extends HttpServlet {
         
         
     }
-    
+    /**
+    * Function to edit Dentist Credentials
+    * gets id from session to instantiate a new object
+    * and update the attributes.
+    *
+    */
     public void editCreds(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -157,7 +166,13 @@ public class Handler extends HttpServlet {
                 }
                 
             }
-        
+/**    
+* Function that checks the database for a match on id and password
+*    
+* @param  id -- id input value from login form
+* @param  pass -- password input value from login form    
+* @return      True if login credentials match, else false
+*/
     protected boolean checkDentist(String id,String pass){
         String validate = null;
         

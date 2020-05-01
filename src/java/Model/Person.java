@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Person Parent class
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Model;
 
-/**
- *
- * @author Neal Valdez
- */
+
+
 public class Person {
     
     protected String Id;
@@ -26,7 +31,12 @@ public class Person {
         lname="";
         email="";        
     }
-    
+    /*******CONSTRUCTOR
+     * @param Id*
+     * @param password*
+     * @param fname*
+     * @param lname*
+     * @param email***/
     protected Person(String Id, String password, String fname, String lname, String email){
         
         this.Id = Id;
@@ -36,7 +46,8 @@ public class Person {
         this.email = email;
     }
     
-    //get & set methods
+    /***GET/SET METHOD
+     * @return S***/
     public String getId(){
         return Id;
     }
@@ -85,6 +96,9 @@ public class Person {
         this.apptList = appts;
     }
     
+    /**
+    *Used for testing purposes
+    */
     public static void main(String [] args){
         Person p1 = new Person("Id","password","Fname","Lname","email");
         

@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Patient Business Object
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Model;
 
 import Model.DBAccess.Access;
@@ -10,13 +17,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-/**
- *
- * @author Neal Valdez
- */
+
 public class Patient extends Person{
     String address;
     String insCo;
@@ -24,7 +27,14 @@ public class Patient extends Person{
     public Patient(){
     this("","","","","","","");
 }
-
+    /**CONSTRUCTOR
+     * @param Id
+     * @param password
+     * @param fname
+     * @param lname
+     * @param address
+     * @param email
+     * @param insCo*/
     public Patient(String Id,String password, String fname, String lname, String address, String email, String insCo){
         super(Id,password,fname,lname,email);
         
@@ -32,7 +42,8 @@ public class Patient extends Person{
         this.insCo = insCo;
         
     }
-    
+    /***GET/SET METHOD
+     * @return S***/
     public String getAddress(){
         return address;
     }
@@ -48,7 +59,11 @@ public class Patient extends Person{
     public void setInsCo(String insCo){
         this.insCo = insCo;
     }
-    
+    /**
+    *Select method used to select a Patient from database
+    *
+    *@param Id -- Patient Id
+    */
     public void selectDB(String Id){
         try{
             Access databaseAccess = new Access();
@@ -76,7 +91,9 @@ public class Patient extends Person{
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
     }
-    
+    /**
+    *Insert method used for inserting new patient to the database
+    */
     public void insertDB(){
         try {
              Access databaseAccess = new Access();
@@ -107,7 +124,9 @@ public class Patient extends Person{
             System.out.println("Exception caught - " + e + System.lineSeparator());
         }
     }
-    
+    /**
+    *Update method used for updating patient info from database.
+    */
     public void updateDB(){
         
         try{
@@ -142,7 +161,9 @@ public class Patient extends Person{
             e.printStackTrace();
         }
     }
-    
+    /**
+    *Delete method used for deleting Patients from database
+    */
     public void deleteDB(){
         try{
             Access databaseAccess = new Access();
@@ -174,7 +195,10 @@ public class Patient extends Person{
             System.out.println("Exception caught - " + ex + System.lineSeparator());
         }
     }
-    
+    /**
+    *Method to retrieve the amount of rows in patient table.
+    *Used for autogenerating patient id
+    */
     public static int getRowCount(){
         int count=0;
         
@@ -189,12 +213,12 @@ public class Patient extends Person{
             }
             
             return count;
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             return 0;
         }
         
     }
-        
+    /******DISPLAY*******/    
     public void display(){
        System.out.println("Id: "+getId()+"\t Password: "+getPw()+"\t Fname: "+
                             getFname()+"\t Lname: "+getLname()+"\t Address: "+getAddress()+
@@ -202,7 +226,9 @@ public class Patient extends Person{
     }
     
     
-    
+    /**
+    *Used for testing purposes
+    */
     public static void main(String[]args){
 //        Patient p1 = new Patient();
 //        p1.selectDB("A900");

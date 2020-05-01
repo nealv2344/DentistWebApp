@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Handles requests from Patients
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Controller;
 
 import Model.Appointment;
@@ -20,10 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Neal Valdez
- */
+
 public class patHandler extends HttpServlet {
 
     /**
@@ -102,7 +106,14 @@ public class patHandler extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+
+    /**
+    * Function recieves two input values from patient login form.
+    * Validates user input using checkPatient() method.
+    * Checks database for Appointments. Runs a conditional statement
+    * to redirect page depending on if user has upcoming appt.
+    * Object added into Session.  
+    */
     public void patLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -147,7 +158,12 @@ public class patHandler extends HttpServlet {
         
         
     }
-    
+    /**
+    * Autogenerates patId.
+    * Recieves credentials from signup form.
+    * Uses insertDB() method to add new patient to the database.
+    * Adds patient into new session.
+    */
     public void patSignup(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //generating new id
@@ -175,7 +191,12 @@ public class patHandler extends HttpServlet {
         rd.forward(request, response);
         
     }
-    
+    /**
+    * Gets Patient out of session.
+    * Instantiates new Appointment object.
+    * Deletes corresponding appointment bases on patient id.
+    * Adds patient back into session.
+    */
     public void cancelAppt(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -191,7 +212,11 @@ public class patHandler extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("jspFiles/patNoAppt.jsp");
                 rd.forward(request, response);
     }
-    
+    /**
+    * Gets Patient out of Session 
+    * Recieves data input from AddAppointment form.
+    * Adds new appointment to database based on patient id.
+    */
     public void addAppt(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException  {
         
@@ -215,7 +240,12 @@ public class patHandler extends HttpServlet {
         rd.forward(request, response);
         
     } 
-    
+    /**
+    * Function to edit Patient Info.
+    * Gets id from session to instantiate a new object
+    * and update the attributes.
+    *
+    */
     public void editPatInfo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -265,14 +295,20 @@ public class patHandler extends HttpServlet {
         }
         
     }  
-
-    private boolean checkPatient(String email, String pw) {
+    /**  
+    * Function that checks the database for a match on id and password
+    *    
+    * @param  id -- id input value from login form
+    * @param  pw -- password input value from login form    
+    * @return      True if login credentials match, else false
+    */
+    private boolean checkPatient(String id, String pw) {
         String validate = null;
         
         try{
             Access access = new Access();
             
-            String sql = "SELECT * FROM Patients WHERE patId='"+email+"' and passwd='"+pw+"'";
+            String sql = "SELECT * FROM Patients WHERE patId='"+id+"' and passwd='"+pw+"'";
         
             ResultSet rs = access.getStatement().executeQuery(sql);
             
@@ -291,7 +327,12 @@ public class patHandler extends HttpServlet {
             return false;
         }
     }
-    
+    /**
+    *Function that checks for appointments using patient id
+    *
+    *@param id -- Patient id
+    *@return    True if Patient has an existing appointment.
+    */
     private boolean validateAppt(String id){
         
         String validate="";

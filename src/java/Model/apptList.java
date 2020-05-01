@@ -1,17 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*********************************************** 
+ * Instructor: Ron Enz
+ * Description: Appointment list utility object
+ * @author Neal Valdez
+ * @version 1.0
+ *
+ * By turning in this code, I Pledge:
+ *  1. That I have completed the programming assignment independently.
+ *  2. I have not copied the code from a student or any source.
+ *  3. I have not given my code to any student.
+ *
+ ************************************************/
 package Model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- *
- * @author Neal Valdez
- */
+/*******apptList*******/
 public class apptList{
     
     int count;
@@ -20,7 +23,8 @@ public class apptList{
     public apptList(){
         
     }
-    
+    /***GET/SET METHOD
+     * @return S***/
     public int getCount(){
         return count;
     }
@@ -29,11 +33,22 @@ public class apptList{
         this.count = count;
     }
     
+    /**
+    *Method used to add appointment to 
+    *appointment list.
+    *
+    *@param appt -- Appointment object
+    */
     public void add(Appointment appt){
         appts.add(appt);
         count++;
     }
-    
+    /**
+    *Method used to remove appointment from 
+    *appointment list.
+    *
+    *@param appt -- Appointment object
+    */
     public void remove(Appointment appt){
         appts.remove(appt);
         count--;
@@ -42,7 +57,7 @@ public class apptList{
     
     
     
-    
+    /******DISPLAY*******/  
     public void displayList(){
         System.out.println("Appts Information"+ System.lineSeparator()+
                 "==================");
@@ -59,6 +74,9 @@ public class apptList{
         }        
     }
     
+    /**
+    *Used for testing purposes
+    */
     public static void main (String args[]){
         
         apptList aL = new apptList();
