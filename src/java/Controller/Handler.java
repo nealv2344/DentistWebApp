@@ -17,6 +17,7 @@ import Model.Dentist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,7 @@ public class Handler extends HttpServlet {
      *
      */          
         //initializes session
-         HttpSession ses1 = null;
+         //HttpSession ses1 = null;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -102,18 +103,17 @@ public class Handler extends HttpServlet {
         
                 String id = request.getParameter("inputId");
                 String pw = request.getParameter("inputPassword");
-                boolean result = checkDentist(id,pw);
+                boolean validate = checkDentist(id,pw);
                 
-                if(result == true){
-                    
+                if(validate == true){
                     Dentist d1 = new Dentist();
                     d1.selectDB(id);
                     d1.retrieveApptList();
                     
                     
-                    ses1 = request.getSession();
+                    HttpSession ses1 = request.getSession();
                     
-                    ses1.setAttribute("dent1", d1);
+                    ses1.setAttribute("d1", d1);
                     ses1.setAttribute("dentId", d1.getId());
                     ses1.setAttribute("apptList",d1.aL.appts);
                     System.out.println("Dentist added to session");
@@ -123,7 +123,7 @@ public class Handler extends HttpServlet {
                 }else{
                     System.out.println("Please check credentials and try again");
                 }
-        
+                
         
     }
     /**
@@ -136,31 +136,32 @@ public class Handler extends HttpServlet {
             throws ServletException, IOException {
         
             try{
-                    String id = (String) request.getSession().getAttribute("dentId");
-                    
+                HttpSession ses2 = request.getSession();  
+                
+                String id = (String) ses2.getAttribute("dentId");
+                Dentist d1 = (Dentist) ses2.getAttribute("d1");
 
-                    String fname = request.getParameter("FirstName");
-                    String lname = request.getParameter("LastName");
-                    String email = request.getParameter("Email");
-                    String office = request.getParameter("Office");
-                    String pw = request.getParameter("Password");
+                String fname = request.getParameter("FirstName");
+                String lname = request.getParameter("LastName");
+                String email = request.getParameter("Email");
+                String office = request.getParameter("Office");
+                String pw = request.getParameter("Password");
+                
+                d1.selectDB(id);
+                d1.setFname(fname);
+                d1.setLname(lname);
+                d1.setEmail(email);
+                d1.setOfficeNum(office);
+                d1.setPw(pw);
+                d1.updateDB();
+                d1.retrieveApptList();
 
-                    Dentist d1 = new Dentist();
-                    d1.selectDB(id);
-                    d1.setFname(fname);
-                    d1.setLname(lname);
-                    d1.setEmail(email);
-                    d1.setOfficeNum(office);
-                    d1.setPw(pw);
-                    d1.updateDB();
-                    d1.retrieveApptList();
-                    
-                    ses1 = request.getSession();
-                    ses1.setAttribute("d1",d1);
-                    ses1.setAttribute("apptList",d1.aL.appts);
-                       
-                    RequestDispatcher rd = request.getRequestDispatcher("jspFiles/dentistPage.jsp");
-                    rd.forward(request, response);
+                //ses2 = request.getSession();
+                ses2.setAttribute("d1",d1);
+                ses2.setAttribute("apptList",d1.aL.appts);
+
+                RequestDispatcher rd = request.getRequestDispatcher("jspFiles/dentistPage.jsp");
+                rd.forward(request, response);
                 }catch(IOException | ServletException e){
                     e.printStackTrace();
                 }
@@ -197,5 +198,32 @@ public class Handler extends HttpServlet {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    private boolean validateAppt(String id){
+        
+        String validate="";
+        
+        try{
+            
+            Access access = new Access();
+            
+            String sql = "SELECT * FROM Appointments WHERE dentId='"+id+"'";
+            
+            ResultSet rs = access.getStatement().executeQuery(sql);
+            
+            if(rs.next()){
+                validate=rs.getString(3);
+            }
+            
+            access.close();
+            System.out.println(validate);
+            return validate.equals(id);
+            
+        }catch(ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        
     }
 }

@@ -27,12 +27,12 @@
     <body>        
         <nav class="navbar navbar-expand-md">
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="#" >Welcome ${dent1.getFname()}!</a>
+            <a class="navbar-brand" href="#" >Welcome ${d1.getFname()}!</a>
 
             <!-- Links -->
             <ul class="navbar-nav justify-content-end" >
               <li class="nav-item">
-                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp?dentId=${dent1.getId()}">Edit Credentials</a>
+                <a class="nav-link" style="color: gainsboro" href="./jspFiles/editCredentials.jsp?dentId=${d1.getId()}">Edit Credentials</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color: gainsboro" href="index.html">Sign Out</a>
